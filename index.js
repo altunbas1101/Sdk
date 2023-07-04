@@ -32,10 +32,12 @@
         },
         get_product_code: () => {
             let product_code = global.SH.helper.getCookie('sh_product_code') ?? PRODUCT_DATA[0].code
+            console.log('product_code',product_code)
             if (product_code) {
                 return product_code;
             }
             return false;
+
         },
         get_order_code: () => {
             let order_code = global.SH.helper.getCookie('sh_order_code');
@@ -48,7 +50,8 @@
             let date = new Date();
             date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
             let expires = `; expires=${date.toUTCString()}`;
-            document.cookie = `sh_product_code=${product_code}${expires}; path=/`;
+            document.cookie = `sh_product_code=${product_code}${expires}; path=/` ?? PRODUCT_DATA[0].code;
+            console.log(document.cookie)
         },
         set_order_code: (order_code) => {
             let order_code = ""
